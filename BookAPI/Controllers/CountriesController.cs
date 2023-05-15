@@ -71,13 +71,15 @@ namespace BookAPI.Controllers
             return Ok(countryDto);
         }
 
-        [HttpGet("authorsByCountryId/{countryId}")]
+        [HttpGet("{countryId}/authors")]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public IActionResult GetAuthorsByCountry(int countryId) 
         {
             var authors = countryRepository.GetAuthorsFromCountry(countryId).ToList();
             if (authors == null) 
             {
-                return NotFound();
+                return NotFound("No authors exists with this country");
             }
             List<AuthorDto> authorDto = mapper.Map<List<AuthorDto>>(authors);
 
