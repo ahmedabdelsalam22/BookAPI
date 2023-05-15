@@ -70,5 +70,18 @@ namespace BookAPI.Controllers
             var countryDto = mapper.Map<CountryDto>(country);
             return Ok(countryDto);
         }
+
+        [HttpGet("authorsByCountryId/{countryId}")]
+        public IActionResult GetAuthorsByCountry(int countryId) 
+        {
+            var authors = countryRepository.GetAuthorsFromCountry(countryId).ToList();
+            if (authors == null) 
+            {
+                return NotFound();
+            }
+            List<AuthorDto> authorDto = mapper.Map<List<AuthorDto>>(authors);
+
+            return Ok(authorDto);
+        }
     }
 }
