@@ -9,6 +9,7 @@ namespace BookAPI
         public MappingConfig()
         {
             CreateMap<Country,CountryDto>();
+            CreateMap<Author, AuthorDto>();
         }
     }
 }
