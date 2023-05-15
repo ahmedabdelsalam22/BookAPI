@@ -1,5 +1,7 @@
 using BookAPI;
 using BookAPI.Data;
+using BookAPI.Repository;
+using BookAPI.Repository.IRepository;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,7 +15,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(opt=>
 
 builder.Services.AddTransient<DbSeedingClass>();
 
-
+builder.Services.AddScoped<ICountryRepository,CountryRepository>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

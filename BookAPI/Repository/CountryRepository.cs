@@ -3,6 +3,7 @@ using BookAPI.Models;
 using BookAPI.Repository.IRepository;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace BookAPI.Repository
 {
@@ -31,8 +32,8 @@ namespace BookAPI.Repository
 
         public Country GetCountry(int countryId)
         {
-            var result = context.Countries.Where(c => c.Id == countryId).FirstOrDefault();
-            return result;         
+            return context.Countries.Where(c => c.Id == countryId).FirstOrDefault();
+                  
         }
 
         public Country GetCountryOfAnAuthor(int authorId)
