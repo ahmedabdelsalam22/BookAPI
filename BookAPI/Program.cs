@@ -17,6 +17,8 @@ builder.Services.AddTransient<DbSeedingClass>();
 
 builder.Services.AddScoped<ICountryRepository,CountryRepository>();
 
+builder.Services.AddAutoMapper(typeof(MappingConfig));
+
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
