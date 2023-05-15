@@ -26,10 +26,6 @@ namespace BookAPI.Controllers
 
             List<CountryDto> countryDTO = mapper.Map<List<CountryDto>>(countries);
 
-            if (countryDTO == null) 
-            {
-                return NotFound("No countries found");
-            }
             return Ok(countryDTO);
         }
     }
