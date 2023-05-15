@@ -30,30 +30,44 @@ namespace BookAPI.Controllers
             {
                 return NotFound("No countries found");
             }
-            if (!ModelState.IsValid) 
+            if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
             List<CountryDto> countryDTO = mapper.Map<List<CountryDto>>(countries);
-            
+
             return Ok(countryDTO);
         }
         [HttpGet("{countryId}")]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public IActionResult GetCountryById([FromHeader] int countryId) 
+        public IActionResult GetCountryById(int countryId)
         {
             bool countryExists = countryRepository.CountryExists(countryId);
-            if (!countryExists) 
+            if (!countryExists)
             {
                 return NotFound("Country not exists");
             }
 
             var country = countryRepository.GetCountry(countryId);
-            
+
             CountryDto countryDto = mapper.Map<CountryDto>(country);
 
+            return Ok(countryDto);
+        }
+
+        [HttpGet("authors/{authorId}")]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public IActionResult GetCountryOfAnAuthor(int authorId)
+        {
+            var country = countryRepository.GetCountryOfAnAuthor(authorId);
+            if (country == null)
+            {
+                return NotFound("No country exists with this author!");
+            }
+            var countryDto = mapper.Map<CountryDto>(country);
             return Ok(countryDto);
         }
     }
